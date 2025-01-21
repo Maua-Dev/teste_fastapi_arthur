@@ -1,7 +1,29 @@
 # from typing import Tuple
-# from ..errors.entity_errors import ParamNotValidated
-# from ..enums.item_type_enum import ItemTypeEnum
+from ..errors.entity_errors import ParamNotValidated
+from ..enums.item_type_enum import ItemTypeEnum
 
+#TESTANDO REQUISIÇÕES COM FASTAPI - DESAFIO MINECRAFT TRAINEE 2023
+class Item:
+    name = str
+    category = ItemTypeEnum
+    item_id = int
+    durability = float
+
+    def __init__ (self, name: str = None, category: ItemTypeEnum = None, item_id: int = 0, durability: float = None):
+        self.name = name
+        self.category = category
+        self.item_id = item_id
+        if not self.validate_durability(durability):
+            raise ParamNotValidated("durability", "must be between 0 and 1")
+        self.durability = durability
+
+
+    @staticmethod
+    def validate_durability(durability: int):
+        if durability < 0 or durability > 1:
+            return False
+        else:
+            return True
 
 # class Item:
 #     name: str
