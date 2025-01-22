@@ -3,7 +3,20 @@
 # from src.app.entities.item import Item
 # from src.app.enums.item_type_enum import ItemTypeEnum
 # from src.app.main import get_all_items, get_item, create_item, delete_item, update_item
-# from src.app.repo.item_repository_mock import ItemRepositoryMock
+
+from src.app.main import get_all_items
+
+class Test_Main:
+    def test_get_all_items(self):
+        response = get_all_items()
+        
+        expected_response = {
+            "items":[{"name":"Maçã Dourada","category":"FOOD","item_id":1,"durability":0},{"name":"Picareta","category":"TOOL","item_id":1,"durability":1},{"name":"Carne","category":"MOB_DROP","item_id":1,"durability":0},{"name":"Baú","category":"BLOCK","item_id":1,"durability":0}]
+        }
+        
+        assert type(response) == dict
+        
+        assert response == expected_response
 
 # class Test_Main:
 #     def test_get_all_items(self):
