@@ -1,4 +1,4 @@
-# from typing import Tuple
+from typing import Tuple
 from ..errors.entity_errors import ParamNotValidated
 from ..enums.item_type_enum import ItemTypeEnum
 
@@ -24,6 +24,14 @@ class Item:
             return False
         else:
             return True
+
+    def to_dict(self) -> dict:
+        return {
+            "name": self.name,
+            "category": self.category.value,
+            "item_id": self.item_id,
+            "durability": self.durability
+        }
 
 # class Item:
 #     name: str
