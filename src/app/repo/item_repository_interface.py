@@ -1,13 +1,21 @@
-# from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod
 # from typing import List, Optional, Tuple
 
 # from ..enums.item_type_enum import ItemTypeEnum
 
-# from ..entities.item import Item
+from ..entities.item import Item
+from typing import List
 
+class IItemRepository(ABC):
+    
+    @abstractmethod
+    def get_all_items(self) -> List[Item]:
+        '''
+        Returns all the itens in the database 
+        '''
+        pass
 
 # class IItemRepository(ABC):
-    
     
 #     @abstractmethod
 #     def get_all_items(self) -> List[Item]:

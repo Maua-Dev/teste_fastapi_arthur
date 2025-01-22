@@ -1,27 +1,27 @@
-# from fastapi import FastAPI, HTTPException
-# from mangum import Mangum
+from fastapi import FastAPI, HTTPException
+from mangum import Mangum
 
-# from .environments import Environments
+from .environments import Environments
 
-# from .repo.item_repository_mock import ItemRepositoryMock
+from .repo.item_repository_mock import ItemRepositoryMock
 
-# from .errors.entity_errors import ParamNotValidated
+from .errors.entity_errors import ParamNotValidated
 
-# from .enums.item_type_enum import ItemTypeEnum
+from .enums.item_type_enum import ItemTypeEnum
 
-# from .entities.item import Item
+from .entities.item import Item
 
 
-# app = FastAPI()
+app = FastAPI()
 
-# repo = Environments.get_item_repo()()
+repo = Environments.get_item_repo()()
 
-# @app.get("/items/get_all_items")
-# def get_all_items():
-#     items = repo.get_all_items()
-#     return {
-#         "items": [item.to_dict() for item in items]
-#     }
+@app.get("/items/get_all_items")
+def get_all_items():
+    items = repo.get_all_items()
+    return {
+        "items": [item.to_dict() for item in items]
+    }
 
 # @app.get("/items/{item_id}")
 # def get_item(item_id: int):

@@ -1,9 +1,25 @@
 # from typing import Dict, Optional, List
 
 # from ..enums.item_type_enum import ItemTypeEnum
-# from ..entities.item import Item
-# from .item_repository_interface import IItemRepository
+from typing import List
 
+from ..enums.item_type_enum import ItemTypeEnum
+from ..entities.item import Item
+from ..repo.item_repository_interface import IItemRepository
+
+class ItemRepositoryMock(IItemRepository):
+    items: List[Item]
+
+    def __init__ (self):
+        self.items = [
+            Item("Maçã Dourada", category=ItemTypeEnum.FOOD, item_id=1, durability=0),
+            Item("Picareta", category=ItemTypeEnum.TOOL, item_id=1, durability=1.0),
+            Item("Carne", category=ItemTypeEnum.MOB_DROP, item_id=1, durability=0),
+            Item("Baú", category=ItemTypeEnum.BLOCK, item_id=1, durability=0)
+        ]
+
+    def get_all_items(self) -> List[Item]:
+        return self.items
 
 # class ItemRepositoryMock(IItemRepository):
 #     items: Dict[int, Item]
