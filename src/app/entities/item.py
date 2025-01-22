@@ -19,7 +19,7 @@ class Item:
 
 
     @staticmethod
-    def validate_durability(durability: int):
+    def validate_durability(durability: float):
         if durability < 0 or durability > 1:
             return False
         else:
