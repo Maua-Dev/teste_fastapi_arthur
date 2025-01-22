@@ -18,6 +18,7 @@ repo = Environments.get_item_repo()()
 
 @app.get("/items/get_all_items")
 def get_all_items():
+    print("Entrando no get_all_items")
     items = repo.get_all_items()
     
     items_list = list()
