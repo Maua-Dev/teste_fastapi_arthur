@@ -20,6 +20,10 @@ class ItemRepositoryMock(IItemRepository):
 
     def get_all_items(self) -> List[Item]:
         return self.items
+    
+    def create_item(self, item: Item) -> Item:
+        self.items.append(item)
+        return item
 
 # class ItemRepositoryMock(IItemRepository):
 #     items: Dict[int, Item]

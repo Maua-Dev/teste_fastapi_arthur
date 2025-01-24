@@ -9,7 +9,7 @@ from .errors.entity_errors import ParamNotValidated
 
 from .enums.item_type_enum import ItemTypeEnum
 
-from .entities.item import Item
+from .entities.item import Item, ItemInput
 
 
 app = FastAPI()
@@ -21,13 +21,40 @@ def get_all_items():
     print("Entrando no get_all_items")
     items = repo.get_all_items()
     
-    items_list = list()
+    # items_list = list()
+    # for item in items:
+    #     items_list.append(item.to_dict())
+    
+    # items_list = [ItemInput(
+    #     name=item.name,
+    #     category=item.category,
+    #     item_id=item.item_id,
+    #     durability=item.durability
+    # ).dict() for item in items]
+    
     for item in items:
-        items_list.append(item.to_dict())
+        print(f"Item: {item.name}, {item.category}, {item.item_id}, {item.durability}")
+
+    items_list = [item.to_dict() for item in items]
         
     return {
         "items": items_list
     }
+
+# from pydantic import BaseModel
+
+# class Item(BaseModel):
+#     name = str
+#     category = ItemTypeEnum
+#     item_id = int
+#     durability = float
+
+item_repo = ItemRepositoryMock()
+
+@app.post("/items/create_item")
+async def create_item(item: ItemInput):
+    new_item = item_repo.create_item(Item(**item.dict()))
+    return new_item
     
 # @app.get("/items/get_all_items")
 # def get_all_items():

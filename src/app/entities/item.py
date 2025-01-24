@@ -1,37 +1,48 @@
 from typing import Tuple
 from ..errors.entity_errors import ParamNotValidated
 from ..enums.item_type_enum import ItemTypeEnum
+from pydantic import BaseModel
 
 #TESTANDO REQUISIÇÕES COM FASTAPI - DESAFIO MINECRAFT TRAINEE 2023
 class Item:
-    name = str
-    category = ItemTypeEnum
-    item_id = int
-    durability = float
+    # name = str
+    # category = ItemTypeEnum
+    # item_id = int
+    # durability = float
 
     def __init__ (self, name: str = None, category: ItemTypeEnum = None, item_id: int = 0, durability: float = None):
         self.name = name
         self.category = category
         self.item_id = item_id
-        if not self.validate_durability(durability):
-            raise ParamNotValidated("durability", "must be between 0 and 1")
+        # if not self.validate_durability(durability):
+        #     raise ParamNotValidated("durability", "must be between 0 and 1")
         self.durability = durability
-
-
-    @staticmethod
-    def validate_durability(durability: float):
-        if durability < 0 or durability > 1:
-            return False
-        else:
-            return True
-
+        
     def to_dict(self) -> dict:
         return {
             "name": self.name,
-            "category": self.category.value,
+            "category": self.category.value if self.category else None,
             "item_id": self.item_id,
             "durability": self.durability
         }
+
+
+class ItemInput(BaseModel):
+    name = str
+    category = ItemTypeEnum
+    item_id = int
+    durability = float
+
+class Config:
+    arbitrary_types_allowed = True
+
+    # @staticmethod
+    # def validate_durability(durability: float):
+    #     if durability < 0 or durability > 1:
+    #         return False
+    #     else:
+    #         return True
+
 
 # class Item:
 #     name: str
